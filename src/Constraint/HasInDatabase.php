@@ -18,19 +18,16 @@ use PHPUnit\Framework\Constraint\Constraint;
 
 class HasInDatabase extends Constraint
 {
-    protected ConnectionInterface $connection;
-
-    protected string $table;
-
-    public function __construct(ConnectionInterface $connection, string $table)
-    {
-        $this->table = $table;
-        $this->connection = $connection;
+    public function __construct(
+        protected ConnectionInterface $connection,
+        protected string $table,
+        protected int $count = 0
+    ) {
     }
 
     public function matches($data): bool
     {
-        return $this->query($data)->count() > 0;
+        return $this->query($data)->count() > $this->count;
     }
 
     public function failureDescription($data): string
@@ -49,7 +46,6 @@ class HasInDatabase extends Constraint
 
     private function query(array $data): Builder
     {
-        /** @var Builder $query */
         $query = $this->connection->table($this->table);
 
         foreach ($data as $index => $value) {
