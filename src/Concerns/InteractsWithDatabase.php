@@ -23,7 +23,7 @@ trait InteractsWithDatabase
 
     protected function assertDatabaseCount(string $table, int $count, ?string $connection = null): void
     {
-        $this->assertThat([], new HasInDatabase($this->getConnection($connection), $table, $count), $table);
+        $this->assertEquals($count, $this->getConnection($connection)->table($table)->count());
     }
 
     protected function assertDatabaseHas(string $table, array $data, ?string $connection = null): void
