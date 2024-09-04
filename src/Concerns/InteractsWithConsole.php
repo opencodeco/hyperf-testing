@@ -31,4 +31,14 @@ trait InteractsWithConsole
 
         return $output->fetch();
     }
+
+    public function seed(): string
+    {
+        $input = new ArrayInput([]);
+        $output = new BufferedOutput();
+
+        ApplicationContext::getContainer()->get(SeedCommand::class)->run($input, $output);
+
+        return $output->fetch();
+    }
 }
