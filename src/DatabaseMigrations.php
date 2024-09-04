@@ -19,6 +19,7 @@ trait DatabaseMigrations
         ApplicationContext::getContainer()->get(ConfigInterface::class)->set('databases.default', $this->database);
 
         $this->fresh();
+        $this->seed();
     }
 
     public function tearDownDatabaseMigrations(): void
