@@ -6,6 +6,7 @@ namespace Hyperf\Testing\Concerns;
 
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Database\Commands\Migrations\FreshCommand;
+use Hyperf\Database\Commands\Seeders\SeedCommand;
 use Hyperf\Database\Commands\Migrations\RollbackCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
