@@ -20,18 +20,17 @@ use PHPUnit\Framework\Constraint\LogicalNot;
 
 trait InteractsWithDatabase
 {
-
-    protected function assertDatabaseCount(string $table, int $count, ?string $connection = null): void
+    protected function assertDatabaseCount(string $table, int $count, ?string $connection = 'sqlite'): void
     {
         $this->assertEquals($count, $this->getConnection($connection)->table($table)->count());
     }
 
-    protected function assertDatabaseHas(string $table, array $data, ?string $connection = null): void
+    protected function assertDatabaseHas(string $table, array $data, ?string $connection = 'sqlite'): void
     {
         $this->assertThat($data, new HasInDatabase($this->getConnection($connection), $table));
     }
 
-    protected function assertDatabaseMissing(string $table, array $data, ?string $connection = null): void
+    protected function assertDatabaseMissing(string $table, array $data, ?string $connection = 'sqlite'): void
     {
         $this->assertThat($data, new LogicalNot(new HasInDatabase($this->getConnection($connection), $table)));
     }

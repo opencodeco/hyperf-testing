@@ -9,13 +9,14 @@ use Hyperf\Database\Commands\Migrations\FreshCommand;
 use Hyperf\Database\Commands\Seeders\SeedCommand;
 use Hyperf\Database\Commands\Migrations\RollbackCommand;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 trait InteractsWithConsole
 {
     public function fresh(): string
     {
-        $input = new ArrayInput([]);
+        $input = new StringInput('--database=sqlite');
         $output = new BufferedOutput();
 
         ApplicationContext::getContainer()->get(FreshCommand::class)->run($input, $output);
@@ -25,7 +26,7 @@ trait InteractsWithConsole
 
     public function rollback(): string
     {
-        $input = new ArrayInput([]);
+        $input = new StringInput('--database=sqlite');
         $output = new BufferedOutput();
 
         ApplicationContext::getContainer()->get(RollbackCommand::class)->run($input, $output);
@@ -35,7 +36,7 @@ trait InteractsWithConsole
 
     public function seed(): string
     {
-        $input = new ArrayInput([]);
+        $input = new StringInput('--database=sqlite');
         $output = new BufferedOutput();
 
         ApplicationContext::getContainer()->get(SeedCommand::class)->run($input, $output);
